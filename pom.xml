@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.inao.reaction</groupId>
-    <artifactId>ReactionPlugin</artifactId>
+    <groupId>me.inao.spigotbase</groupId>
+    <artifactId>SpigotBase</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <build>
@@ -26,7 +26,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>me.inao.reaction.Main</mainClass>
+                            <mainClass>me.inao.spigotbase.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -36,7 +36,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>me.inao.reaction.Main</mainClass>
+                            <mainClass>me.inao.spigotbase.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

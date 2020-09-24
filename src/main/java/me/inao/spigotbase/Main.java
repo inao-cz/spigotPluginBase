@@ -1,14 +1,16 @@
-package me.inao.reaction;
+package me.inao.spigotbase;
 
-import me.inao.reaction.commands.Loader;
+import me.inao.spigotbase.util.Loader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
-        sayConsole("Welcome to &binao's special Reaction plugin!");
-        new Loader(this);
+        sayConsole("Welcome to &binao's special Base plugin!");
+        Loader loader = new Loader(this);
+        loader.loadCommands();
+        loader.loadEvents();
     }
 
     @Override

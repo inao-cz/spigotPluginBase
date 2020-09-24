@@ -1,9 +1,10 @@
-package me.inao.reaction.commands;
+package me.inao.spigotbase.util;
 
-import me.inao.reaction.Main;
+import me.inao.spigotbase.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.event.Listener;
 import org.bukkit.help.GenericCommandHelpTopic;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.IndexHelpTopic;
@@ -15,10 +16,24 @@ public class Loader {
     private final Main main;
     public Loader(Main main){
         this.main = main;
-        load();
     }
 
-    private void load(){
+    private Reflections getReflector(String feature){
+        return new Reflections("me.inao.spigotbase."+feature);
+    }
+    private Set<?> getClasses(Reflections reflector, Class<?> cls){
+        if(cls == null){
+            return null;
+        }
+        try{
+            return reflector.getSubTypesOf(cls);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void loadCommands(){
         CommandMap map = null;
         try{
             Field cmdMap = Bukkit.getPluginManager().getClass().getDeclaredField("commandMap");
@@ -28,8 +43,7 @@ public class Loader {
             e.printStackTrace();
         }
         HashSet<Command> coms = new HashSet<>();
-        Reflections reflections = new Reflections("me.inao.reaction.commands.command");
-        Set<Class<? extends Command>> commands = reflections.getSubTypesOf(Command.class);
+        Set<Class<? extends Command>> commands = ((Set<Class<? extends Command>>)getClasses(getReflector("command"), Command.class));
         for(Class<?extends Command> cls : commands){
             try{
                 Command command = cls.getDeclaredConstructor(new Class[]{String.class, Main.class}).newInstance(new Object[]{cls.getSimpleName().toLowerCase(), main});
@@ -53,5 +67,16 @@ public class Loader {
                 topics,
                 "Reactions Help"
         ));
+    }
+
+    public void loadEvents(){
+        Set<Class<? extends Listener>> events = ((Set<Class<? extends Listener>>)getClasses(getReflector("event"), Listener.class));
+        for(Class<? extends Listener> cls : events){
+            try{
+                main.getServer().getPluginManager().registerEvents(cls.getDeclaredConstructor().newInstance(), main);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

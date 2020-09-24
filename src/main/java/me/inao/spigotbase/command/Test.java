@@ -1,8 +1,8 @@
-package me.inao.reaction.commands.command;
+package me.inao.spigotbase.command;
 
-import me.inao.reaction.Main;
-import me.inao.reaction.Message;
-import me.inao.reaction.Permission;
+import me.inao.spigotbase.Main;
+import me.inao.spigotbase.Message;
+import me.inao.spigotbase.Permission;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

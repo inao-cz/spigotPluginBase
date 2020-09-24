@@ -1,4 +1,4 @@
-package me.inao.reaction;
+package me.inao.spigotbase;
 
 public enum Message {
     PERMS_NOPERMS("§cSorry, but you don't have enough permissions for that :("),

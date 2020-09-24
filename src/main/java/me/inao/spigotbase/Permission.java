@@ -1,4 +1,4 @@
-package me.inao.reaction;
+package me.inao.spigotbase;
 
 public enum Permission {
     COMMAND_TEST("reactions.commands.test");
